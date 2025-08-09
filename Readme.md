@@ -30,18 +30,20 @@ you can apply CRUD already.
 How to use the API
 ------------------
 
-1. Authentication is required for this API. Get your Token. ---->
+1. Authentication is required to use it, get your token first. ---->
 
 
 
 2. Create/POST ex. ---->
                  
-                  {
-                   BeverageName: "Perrier",
-                   Category: "Water",
-                   Price: "12.50",
-                   Stock: 9
-                  }
+                  
+                   {
+                     "name": "Smirnoff",
+                     "brand": "Diageo",
+                     "quantity": 7,
+                     "unit": "bottles",
+                     "category": "Vodka"
+                   }
 
 
               
@@ -58,9 +60,11 @@ Delete ---->
 
            Be measure to select the beverageId to delete this product
 
-           {       BeverageId: 1,
-                   BeverageName: "Perrier",
-                   Category: "Water",
-                   Price: "12.50",
-                   Stock: 9
-            }
+                   {
+                     "name": "Smirnoff",
+                     "brand": "Diageo",
+                     "quantity": 7,
+                     "unit": "bottles",
+                     "category": "Vodka"
+                    }
+            
