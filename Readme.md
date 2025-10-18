@@ -1,8 +1,5 @@
 
-
-El dia de hoy Febrero 18 a las 11:51 pm
-logre conectar mi DB de forma exitosa en postgresql,
-usando migracion en django y SQL en PgAdmin4
+LAST UPDATE: 18/10/2025
 
 
 
@@ -32,33 +29,45 @@ How to use the API
 
 1. Authentication is required to use it, get your token first. ---->
 
-
-
 2. Create/POST ex. ---->
                  
-                  
-                   {
-                     "name": "Smirnoff",
-                     "brand": "Diageo",
-                     "quantity": 7,
-                     "unit": "bottles",
-                     "category": "Vodka"
-                   }
+   URL: http://127.0.0.1:8000/api/beverages/ 
 
+          {
+            "name": "Smirnoff",
+            "brand": "Diageo",
+            "quantity": 7,
+            "unit": "bottles",
+            "category": "Vodka"
+          }
+            
+3. Read/GET ex. ------> 
 
-              
-Read/GET ex. ------> 
                    
-                  /api/beverages/
+   URL: http://127.0.0.1:8000/api/beverages/
+         
 
+4. Update/PUT ------->  
 
-Update/PUT ------->  
+         URL: http://localhost:8000/beverages/1/
+                  
+              EX:
+                  {
+                    "name": "Black Label",
+                    "brand": "Diageo",
+                    "quantity": 12,
+                    "unit": "bottles",
+                    "category": "Vodka",
+                    "min_stock": 8
+                  }
 
-                  Just renew the data
+5. Delete ---->
 
-Delete ---->
+        Be measure to select the beverageId to delete this product
 
-           Be measure to select the beverageId to delete this product
+        URL: http://localhost:8000/api/beverages/15/ 
+
+              EX: 
 
                    {
                      "name": "Smirnoff",

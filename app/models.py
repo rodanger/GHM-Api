@@ -14,14 +14,17 @@ class User(AbstractUser):
         return f"{self.username} - ({self.role})"
 
 class Beverage(models.Model):
-    name = models.CharField(max_length=100, default='Unnamed Beverage')       # <- default agregado
+    name = models.CharField(max_length=100, default='Unnamed Beverage')
     brand = models.CharField(max_length=100, blank=True, null=True)
-    quantity = models.PositiveIntegerField(default=0)                         # <- default agregado
-    unit = models.CharField(max_length=50, default='unit')                    # <- **agregado default**
+    quantity = models.PositiveIntegerField(default=0)
+    unit = models.CharField(max_length=50, default='unit')
     category = models.CharField(max_length=50, blank=True, null=True)
+    min_stock = models.PositiveIntegerField(default=10)  # ✅ Agregado correctamente
 
     def __str__(self):
         return f"{self.name} ({self.quantity} {self.unit})"
+
+
 
 
 class Cleaner(models.Model):

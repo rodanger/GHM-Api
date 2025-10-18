@@ -4,11 +4,13 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 # Serializer para Beverage
 class BeverageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Beverage
-        fields = ['id', 'name', 'brand', 'quantity', 'unit', 'category']
+        fields = ['id', 'name', 'brand', 'quantity', 'unit', 'category', 'min_stock']
+
         
 
 
