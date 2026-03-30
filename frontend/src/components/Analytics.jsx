@@ -146,6 +146,32 @@ const STYLES = `
   .an-loading { display: flex; align-items: center; justify-content: center; height: 300px; }
   .an-spinner { width: 32px; height: 32px; border: 2px solid rgba(255,255,255,0.08); border-top-color: #4f46e5; border-radius: 50%; animation: spin 0.8s linear infinite; }
 
+  /* ── AI Agent (same as Dashboard) ── */
+  .ai-fab { position:fixed; bottom:28px; right:28px; width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 24px rgba(0,0,0,0.4); transition:transform .2s, box-shadow .2s; z-index:100; }
+  .ai-fab:hover { transform:scale(1.08); background:rgba(255,255,255,0.2); }
+  .ai-panel { position:fixed; bottom:92px; right:28px; width:370px; height:500px; background:#0f0f13; border:1px solid rgba(255,255,255,0.08); border-radius:16px; display:flex; flex-direction:column; z-index:100; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.6); animation:slideUp .25s cubic-bezier(0.34,1.56,0.64,1); }
+  .ai-header { padding:14px 18px; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.03); }
+  .ai-dot { width:8px; height:8px; border-radius:50%; background:#4ade80; box-shadow:0 0 8px #4ade80; animation:pulse-dot 2s infinite; }
+  .ai-header-title { font-size:13px; font-weight:500; color:#e0e0e0; }
+  .ai-header-sub { font-size:11px; color:rgba(255,255,255,0.25); margin-left:auto; }
+  .ai-messages { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; scrollbar-width:thin; scrollbar-color:rgba(255,255,255,0.08) transparent; }
+  .ai-msg { max-width:85%; font-size:13px; line-height:1.5; padding:9px 13px; border-radius:10px; animation:fadeMsg .2s ease; font-family:'DM Sans',sans-serif; }
+  .ai-msg.user { background:rgba(255,255,255,0.12); color:#fff; align-self:flex-end; border-bottom-right-radius:3px; }
+  .ai-msg.assistant { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.06); color:#d0d0d0; align-self:flex-start; border-bottom-left-radius:3px; white-space:pre-wrap; }
+  .ai-typing { display:flex; gap:4px; align-items:center; padding:10px 13px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.06); border-radius:10px; border-bottom-left-radius:3px; align-self:flex-start; }
+  .ai-typing span { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.3); animation:bounce 1.2s infinite; }
+  .ai-typing span:nth-child(2) { animation-delay:.2s; }
+  .ai-typing span:nth-child(3) { animation-delay:.4s; }
+  .ai-input-area { padding:10px 14px; border-top:1px solid rgba(255,255,255,0.06); display:flex; gap:8px; align-items:center; }
+  .ai-input { flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:7px; padding:8px 11px; color:#e0e0e0; font-family:'DM Sans',sans-serif; font-size:13px; outline:none; transition:border-color .2s; }
+  .ai-input:focus { border-color:rgba(255,255,255,0.3); }
+  .ai-input::placeholder { color:rgba(255,255,255,0.2); }
+  .ai-send { width:34px; height:34px; border-radius:7px; background:rgba(255,255,255,0.15); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; flex-shrink:0; }
+  .ai-send:hover { background:rgba(255,255,255,0.25); }
+  .ai-send:disabled { opacity:.4; cursor:not-allowed; }
+  .close-btn { background:none; border:none; color:rgba(255,255,255,0.3); cursor:pointer; padding:2px; display:flex; transition:color .2s; margin-left:auto; }
+  .close-btn:hover { color:rgba(255,255,255,0.7); }
+
   :root.light .an-root { background: #f4f4f8 !important; color: #1a1a2e; }
   :root.light .an-title { color: #1a1a2e !important; }
   :root.light .an-subtitle { color: rgba(0,0,0,0.35) !important; }
@@ -168,9 +194,22 @@ const STYLES = `
   :root.light .low-type-badge { color: rgba(0,0,0,0.3) !important; }
   :root.light .all-good { color: rgba(0,0,0,0.3) !important; }
   :root.light .low-logo { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.07) !important; }
+  :root.light .ai-panel { background: #fff; border-color: rgba(0,0,0,0.08); }
+  :root.light .ai-msg.user { background: rgba(0,0,0,0.08); color: #1a1a2e; }
+  :root.light .ai-msg.assistant { background: #f4f4f8; border-color: rgba(0,0,0,0.06); color: #333; }
+  :root.light .ai-input { background: #f4f4f8; border-color: rgba(0,0,0,0.1); color: #1a1a2e; }
+  :root.light .ai-send { background: rgba(0,0,0,0.1); }
+  :root.light .ai-send:hover { background: rgba(0,0,0,0.2); }
+  :root.light .ai-fab { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.12); }
+  :root.light .ai-fab:hover { background: rgba(0,0,0,0.15); }
+  :root.light .ai-header { background: rgba(0,0,0,0.02); }
 
   @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
   @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes slideUp { from{opacity:0;transform:translateY(16px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+  @keyframes fadeMsg { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.4} }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
 
   .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.35); }
@@ -178,9 +217,9 @@ const STYLES = `
 `
 
 const CAT_COLORS = [
-  "#6366f1", "#8b5cf6", "#a78bfa", "#818cf8",
-  "#38bdf8", "#34d399", "#fbbf24", "#f87171",
-  "#c084fc", "#60a5fa", "#4ade80", "#fb923c"
+  "#6366f1","#8b5cf6","#a78bfa","#818cf8",
+  "#38bdf8","#34d399","#fbbf24","#f87171",
+  "#c084fc","#60a5fa","#4ade80","#fb923c"
 ]
 
 function ItemLogo({ item }) {
@@ -199,6 +238,137 @@ function ItemLogo({ item }) {
     </div>
   )
 }
+
+// ── AI Agent ──────────────────────────────────────────────────────────────────
+function AIAgent({ beverages, cleaners }) {
+  const [open, setOpen] = useState(false)
+  const [messages, setMessages] = useState([{
+    role: "assistant",
+    content: "Hello! I'm your Analytics assistant. Ask me about inventory levels, low stock alerts, category trends, or purchase recommendations."
+  }])
+  const [input, setInput] = useState("")
+  const [loading, setLoading] = useState(false)
+  const bottomRef = useRef(null)
+
+  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }) }, [messages, loading])
+
+  const sendMessage = async () => {
+    if (!input.trim() || loading) return
+    const userMsg = { role: "user", content: input.trim() }
+    const newMessages = [...messages, userMsg]
+    setMessages(newMessages)
+    setInput("")
+    setLoading(true)
+
+    const allItems = [...beverages, ...cleaners]
+    const lowStock = allItems.filter(i => i.quantity <= i.min_stock)
+
+    const catMap = {}
+    allItems.forEach(i => {
+      const cat = i.category || "Uncategorized"
+      catMap[cat] = (catMap[cat] || 0) + i.quantity
+    })
+    const catSummary = Object.entries(catMap)
+      .sort((a, b) => b[1] - a[1])
+      .map(([cat, qty]) => `  - ${cat}: ${qty} units`)
+      .join("\n")
+
+    const systemPrompt = `You are an AI Analytics assistant for GHM (Graydon Hall Manor), a luxury hotel.
+You are embedded in the Analytics page of the inventory system.
+
+INVENTORY SUMMARY:
+- Total products: ${allItems.length} (${beverages.length} beverages, ${cleaners.length} cleaners)
+- Total units in stock: ${allItems.reduce((s, i) => s + i.quantity, 0).toLocaleString()}
+- Low stock alerts: ${lowStock.length}
+- Categories: ${Object.keys(catMap).length}
+
+BEVERAGES (${beverages.length}):
+${beverages.map(b => `- ${b.name} (${b.brand || "N/A"}) | Qty: ${b.quantity} ${b.unit} | Cat: ${b.category || "N/A"} | Min: ${b.min_stock}`).join("\n") || "None"}
+
+CLEANERS (${cleaners.length}):
+${cleaners.map(c => `- ${c.name} (${c.brand || "N/A"}) | Qty: ${c.quantity} ${c.unit} | Cat: ${c.category || "N/A"} | Min: ${c.min_stock}`).join("\n") || "None"}
+
+LOW STOCK ITEMS:
+${lowStock.length > 0
+  ? lowStock.map(i => `⚠️ ${i.name}: ${i.quantity} / min ${i.min_stock} ${i.unit}`).join("\n")
+  : "✅ All items adequately stocked"}
+
+STOCK BY CATEGORY:
+${catSummary || "No category data"}
+
+RULES:
+- Only use the data above. Never invent numbers.
+- Focus on actionable insights: what needs reorder, what is trending low, which category is most stocked.
+- Be concise and professional.
+- Respond in the user's language (English or Spanish).`
+
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: systemPrompt,
+          messages: newMessages.map(m => ({ role: m.role, content: m.content }))
+        })
+      })
+      const data = await res.json()
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: data.content?.[0]?.text || "Error processing request."
+      }])
+    } catch {
+      setMessages(prev => [...prev, { role: "assistant", content: "Connection error." }])
+    } finally { setLoading(false) }
+  }
+
+  return (
+    <>
+      <button className="ai-fab" onClick={() => setOpen(v => !v)} title="Analytics Assistant">
+        {open
+          ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M8 12h.01M12 12h.01M16 12h.01" strokeWidth="2.5" strokeLinecap="round"/></svg>
+        }
+      </button>
+      {open && (
+        <div className="ai-panel">
+          <div className="ai-header">
+            <div className="ai-dot" />
+            <div className="ai-header-title">Analytics Assistant</div>
+            <span className="ai-header-sub">Claude</span>
+            <button className="close-btn" onClick={() => setOpen(false)}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <div className="ai-messages">
+            {messages.map((m, i) => (
+              <div key={i} className={`ai-msg ${m.role}`}>{m.content}</div>
+            ))}
+            {loading && (
+              <div className="ai-typing"><span /><span /><span /></div>
+            )}
+            <div ref={bottomRef} />
+          </div>
+          <div className="ai-input-area">
+            <input
+              className="ai-input"
+              placeholder="Ask about stock, trends, alerts..."
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && sendMessage()}
+              disabled={loading}
+            />
+            <button className="ai-send" onClick={sendMessage} disabled={loading || !input.trim()}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function Analytics({ token, role }) {
   const [beverages, setBeverages] = useState([])
@@ -265,7 +435,9 @@ export default function Analytics({ token, role }) {
             <div className="kpi-label">Total Products</div>
             <div className="kpi-value">{totalItems}</div>
             <div className="kpi-sub">
-              {canSeeBeverages && `${beverages.length} bev`}{canSeeBeverages && canSeeCleaners && ' · '}{canSeeCleaners && `${cleaners.length} clean`}
+              {canSeeBeverages && `${beverages.length} bev`}
+              {canSeeBeverages && canSeeCleaners && ' · '}
+              {canSeeCleaners && `${cleaners.length} clean`}
             </div>
             <div className="kpi-icon">📦</div>
           </div>
@@ -341,14 +513,11 @@ export default function Analytics({ token, role }) {
                 <div key={cat} className="bar-row">
                   <div className="bar-label" title={cat}>{cat}</div>
                   <div className="bar-track">
-                    <div
-                      className="bar-fill"
-                      style={{
-                        "--target-width": `${(qty / maxCat) * 100}%`,
-                        "--bar-color": CAT_COLORS[i % CAT_COLORS.length],
-                        "--delay": `${i * 0.06}s`
-                      }}
-                    />
+                    <div className="bar-fill" style={{
+                      "--target-width": `${(qty / maxCat) * 100}%`,
+                      "--bar-color": CAT_COLORS[i % CAT_COLORS.length],
+                      "--delay": `${i * 0.06}s`
+                    }} />
                   </div>
                   <div className="bar-qty">{qty}</div>
                 </div>
@@ -420,6 +589,9 @@ export default function Analytics({ token, role }) {
         </div>
 
       </div>
+
+      {/* AI Agent - same position as Dashboard */}
+      <AIAgent beverages={beverages} cleaners={cleaners} />
     </div>
   )
 }
